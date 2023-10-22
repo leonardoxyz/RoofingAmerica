@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RoofingAmerica.Api.Requests;
 using RoofingAmerica.Domain.Models;
@@ -6,6 +8,7 @@ using RoofingAmerica.Domain.Services;
 
 namespace RoofingAmerica.Api.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("api/Sale")]
     public class SaleController : Controller
@@ -23,7 +26,7 @@ namespace RoofingAmerica.Api.Controllers
         public async Task<IActionResult> RegisterSale(Sale sale)
         {
             var registeredSale = await _saleService.RegisterSaleAsync(sale);
-            return CreatedAtAction(nameof(RegisterSale), new {id = registeredSale.Id }, registeredSale);
+            return CreatedAtAction(nameof(RegisterSale), new { id = registeredSale.Id }, registeredSale);
         }
 
         [HttpGet]
@@ -40,7 +43,7 @@ namespace RoofingAmerica.Api.Controllers
             if (sale == null)
             {
                 return NotFound();
-            } 
+            }
             else
             {
                 return Ok(sale);
@@ -61,11 +64,14 @@ namespace RoofingAmerica.Api.Controllers
             return Ok(updatedSale);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")] // Corrigi o caminho do parâmetro "id"
         public async Task<IActionResult> DeleteSale(Guid id)
         {
             var existingSale = await _saleService.DeleteSaleAsync(id);
-            if (!existingSale) { return NotFound(); }
+            if (!existingSale)
+            {
+                return NotFound();
+            }
 
             return NoContent();
         }

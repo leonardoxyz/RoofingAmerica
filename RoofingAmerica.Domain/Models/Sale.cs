@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoofingAmerica.Domain.Models
 {
@@ -12,7 +8,22 @@ namespace RoofingAmerica.Domain.Models
         public int Cut { get; set; }
         public int Quantity { get; set; }
         public string Description { get; set; }
-        public double Discount { get; set; }
-        public double Price { get; set; }
+
+        private double discount;
+        private double price;
+
+        public double Discount
+        {
+            get { return discount; }
+            set { discount = Math.Round(value, 2); }
+        }
+
+        public double Price
+        {
+            get { return price; }
+            set { price = Math.Round(value, 2); }
+        }
+        public string FormattedDiscount => Discount.ToString("C2");
+        public string FormattedPrice => Price.ToString("C2");
     }
 }

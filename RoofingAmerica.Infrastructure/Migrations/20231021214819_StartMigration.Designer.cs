@@ -4,15 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RoofingAmerica.Infrastructure.Data;
 
 #nullable disable
 
 namespace RoofingAmerica.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231018020450_Initial")]
-    partial class Initial
+    [Migration("20231021214819_StartMigration")]
+    partial class StartMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
