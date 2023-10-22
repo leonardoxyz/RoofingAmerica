@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using RoofingAmerica.Domain.Models;
+using System.Text;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using RoofingAmerica.Domain.Core.Data;
 using RoofingAmerica.Domain.Models;
