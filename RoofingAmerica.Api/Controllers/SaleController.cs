@@ -64,7 +64,7 @@ namespace RoofingAmerica.Api.Controllers
             return Ok(updatedSale);
         }
 
-        [HttpDelete("{id}")] // Corrigi o caminho do parâmetro "id"
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSale(Guid id)
         {
             var existingSale = await _saleService.DeleteSaleAsync(id);

@@ -138,6 +138,33 @@ namespace RoofingAmerica.Api.Controllers
             });
         }
 
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            var users = _userManager.Users.ToList();
+            return Ok(users);
+        }
+
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return NoContent();
+            }
+
+            return BadRequest("Failed to delete the user.");
+        }
+
+
         private string GenerateJwtToken(IdentityUser user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
